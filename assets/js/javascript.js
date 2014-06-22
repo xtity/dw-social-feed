@@ -82,7 +82,7 @@
                                 url = "http://widget.stagram.com/rss/n/"+username+"/";
                             } else if ( query.substring(0,1) == '#') {
                                 keyword = query.substring(1);
-                                url = ("http://widget.stagram.com/rss/tag/"+keyword+"/");
+                                url = ("http://instagram.com/tags/" + keyword + "/feed/recent.rss");
                             } else {
                                 url = ("http://widget.stagram.com/rss/tag/"+query+"/");
                             }

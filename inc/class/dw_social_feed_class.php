@@ -983,7 +983,7 @@ class dwsf_social_feed{
 			$xml = ('http://widget.stagram.com/rss/n/'.$username.'/');
 		} elseif (substr($keyword, 0, 1) == '#') {
 			$keyword = substr($keyword, 1);
-			$xml = ('http://widget.stagram.com/rss/tag/'.$keyword.'/');
+			$xml = ('http://instagram.com/tags/'.$keyword.'/feed/recent.rss');
 		} else {
 			$xml = ('http://widget.stagram.com/rss/tag/'.$keyword.'/');
 		}
@@ -1001,14 +1001,20 @@ class dwsf_social_feed{
 				}
 				
 				$it = new stdClass();
-				$it->image 		= @$item->getElementsByTagName('image')->item(0)->getElementsByTagName('url')->item(0)->childNodes->item(0)->nodeValue;
-				if(!$it->image) {
-					continue;
-				}
-				$it->title		= $item->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;
-				$it->link		= $item->getElementsByTagName('link')->item(0)->childNodes->item(0)->nodeValue;
-				$it->desc		= $item->getElementsByTagName('description')->item(0)->childNodes->item(0)->nodeValue;
-				$it->pubDate	= $item->getElementsByTagName('pubDate')->item(0)->childNodes->item(0)->nodeValue;
+// 				$it->image 		= @$item->getElementsByTagName('image')->item(0)->getElementsByTagName('url')->item(0)->childNodes->item(0)->nodeValue;
+// 				if(!$it->image) {
+// 					continue;
+// 				}
+// 				$it->title		= $item->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;
+// 				$it->link		= $item->getElementsByTagName('link')->item(0)->childNodes->item(0)->nodeValue;
+// 				$it->desc		= $item->getElementsByTagName('description')->item(0)->childNodes->item(0)->nodeValue;
+// 				$it->pubDate	= $item->getElementsByTagName('pubDate')->item(0)->childNodes->item(0)->nodeValue;
+				
+				$it->image 		= $item->getElementsByTagName('link')->item(0)->nodeValue;
+				$it->title		= $item->getElementsByTagName('title')->item(0)->nodeValue;
+				$it->link		= $item->getElementsByTagName('link')->item(0)->nodeValue;
+				$it->desc		= $item->getElementsByTagName('description')->item(0)->nodeValue;
+				$it->pubDate	= $item->getElementsByTagName('pubDate')->item(0)->nodeValue;
 				//$it->author		= $item->getElementsByTagName('author')->item(0)->childNodes->item(0)->nodeValue;
 				if(!empty($author)) {
 					$it->author		= $author;
@@ -1065,7 +1071,8 @@ class dwsf_social_feed{
 		$pathinfo = pathinfo($url);
 		$ext = $pathinfo['extension'];
 
-    	$image_name = time().'.'.$ext;
+    	// $image_name = time().'.'.$ext;
+		$image_name = $post_id.'-'.time().'.'.$ext;
     	if( wp_mkdir_p($upload_dir['path']) )
 	        $file = $upload_dir['path'] . '/' . $image_name;
 	    else
