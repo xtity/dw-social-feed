@@ -1,0 +1,16 @@
+tmp
+.classpath
+.project
+.settings
+.idea
+.svn/
+.DS_Store
+.metadata/
+log/
+target/
+work/
+etc/
+*/target/**
+*/work/**
+*/build/**
+
