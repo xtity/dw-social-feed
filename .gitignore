@@ -1,4 +1,3 @@
-tmp
 .classpath
 .project
 .settings
@@ -12,5 +11,4 @@ work/
 etc/
 */target/**
 */work/**
-*/build/**
 
